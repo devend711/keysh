@@ -3,14 +3,14 @@ require 'thor'
 module Keysh
   class Manager < Thor
     desc "config", "opens your ssh config file in vim"
-    option :editor_name, :aliases => :e
+    option :editor, :aliases => :e
     def config
-      editor = options.has_key?("editor_name") ? options["editor_name"] : 'vim'
+      editor = options.has_key?("editor") ? options["editor"] : 'vim'
       system("#{editor} ~/.ssh/config")
     end
 
-    desc "use <NAME>", "switches to host NAME"
-    def use(host_name)
+    desc "ssh <NAME>", "ssh to host NAME"
+    def ssh(host_name)
       `ssh -T #{host_name}`
     end
 
@@ -25,6 +25,11 @@ module Keysh
         id_rsa_name = ('id_rsa_') + id_rsa_name
       end
       `ssh-add ~/.ssh/#{id_rsa_name}`
+    end
+
+    desc "rm <HOST_NAME>", "remove a known host"
+    def rm(host_name)
+      `ssh-keygen -R #{host_name}`
     end
 
     desc "assign <KEY> <HOST>", "specify a keyfile to assign to a host"
@@ -46,10 +51,10 @@ module Keysh
       `ssh-keygen -t #{type}#{comment}`
     end
 
-    desc "set", "sets git username (--u) and/or email (--e) locally (set globally with --global)"
+    desc "setgit", "sets git username (--u) and/or email (--e) locally (set globally with --global)"
     option :username, :aliases => :u
     option :email, :aliases => :e
-    def set
+    def setgit
       global = options.has_key?("global") ? '--global' : ''
       if !options.has_key?("username") && !options.has_key?("email")
         puts "Pass a --username and/or --email option to set your git config"
