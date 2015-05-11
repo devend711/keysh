@@ -51,6 +51,10 @@ module Keysh
       `ssh-keygen -t #{type}#{comment}`
     end
 
+    desc "gitconfig", "test"
+    def gitconfig
+    end
+
     desc "setgit", "sets git username (--u) and/or email (--e) locally (set globally with --global)"
     option :username, :aliases => :u
     option :email, :aliases => :e
