@@ -23,25 +23,15 @@ run `keysh help` for help!
 ### Commands
 
   - keysh add <ID>             # adds an rsa id ID key
-
   - keysh assign <KEY> <HOST>  # specify a keyfile to assign to a host
-
   - keysh clear                # clear SSH identities
-
   - keysh config               # opens your ssh config file in vim
-
   - keysh gitconfig            # view local git config (or add --global to see global git config)
-
   - keysh help [COMMAND]       # Describe available commands or one specific command
-
   - keysh keygen               # create a new rsa SSH key
-
   - keysh keys                 # list your stored keys
-
   - keysh rm <HOST_NAME>       # remove a known host
-
   - keysh setgit               # sets git username (--u) and/or email (--e) locally (set globally with --global)
-  
   - keysh ssh <NAME>           # ssh to host NAME
 
 ## Contributing
