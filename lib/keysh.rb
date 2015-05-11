@@ -51,13 +51,17 @@ module Keysh
       `ssh-keygen -t #{type}#{comment}`
     end
 
-    desc "gitconfig", "test"
+    desc "gitconfig", "view local git config (or add --global to see global git config)"
+    option :global
     def gitconfig
+      global = options.has_key?("global") ? '--global' : ''
+      system("git config #{global} --list")
     end
 
     desc "setgit", "sets git username (--u) and/or email (--e) locally (set globally with --global)"
     option :username, :aliases => :u
     option :email, :aliases => :e
+    option :global
     def setgit
       global = options.has_key?("global") ? '--global' : ''
       if !options.has_key?("username") && !options.has_key?("email")
